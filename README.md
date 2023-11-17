@@ -1,4 +1,4 @@
-![platepilot-nextjs-banner](/public/images/platepilot.jpg)
+![platepilot-nextjs-banner](/public/images/platepilot.png)
 
 # PlatePilot
 
