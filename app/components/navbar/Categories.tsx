@@ -1,92 +1,88 @@
 'use client'
 
-import { TbToolsKitchen2 } from "react-icons/tb";
-import { BiBed, BiBath, BiBookBookmark, BiCycling, BiDesktop, BiChair, BiCloset } from "react-icons/bi";
-import { MdFace3 } from "react-icons/md";
-import { FaRegLightbulb } from "react-icons/fa";
-import { BsBookshelf } from "react-icons/bs";
+
 import { MdOutlineFastfood, MdOutlineOtherHouses } from "react-icons/md";
-import { TbShoe } from "react-icons/tb"
-import { IoAmericanFootballOutline } from "react-icons/io5";
 import CategoryBox from "../CategoryBox";
 import { useSearchParams, usePathname } from "next/navigation";
-import { PiCarBold } from "react-icons/pi";
+
+import {
+  FaHamburger,
+  FaFortAwesome,
+  FaToriiGate,
+  FaHatCowboy,
+  FaLeaf,
+  FaGlassMartiniAlt,
+  FaCoffee,
+  FaEgg,
+} from 'react-icons/fa';
+import {GiElephant, GiNoodles} from 'react-icons/gi';
+import { FaPizzaSlice, FaBurger } from 'react-icons/fa6'
+import { GiTacos } from 'react-icons/gi'
+import { PiBowlFood } from 'react-icons/pi'
+import { CiBowlNoodles } from 'react-icons/ci'
+import { TbCheese } from 'react-icons/tb'
+
 
 export const categories = [
   {
-    label: 'Bedding',
-    icon: BiBed,
-    description: 'Bed sheets, pillows, comforters, mattress pads'
+    label: 'Pizza',
+    icon: FaPizzaSlice,
+    description: ''
   },
   {
-    label: 'Bath',
-    icon: BiBath,
-    description: 'Towels, bathrobes, bath mats, shower curtains'
+    label: 'Burger',
+    icon: FaBurger,
+    description: ''
   },
   {
-    label: 'Clothes',
-    icon: BiCloset,
-    description: 'Shirts, pants, dresses, jackets, sweaters'
+    label: 'Indian',
+    icon: GiElephant,
+    description: ''
   },
   {
-    label: 'Desk/Chair',
-    icon: BiChair,
-    description: 'Office chairs, study desks, stationery'
+    label: 'Chinese',
+    icon: PiBowlFood,
+    description: ''
   },
   {
-    label: 'Shelf',
-    icon: BsBookshelf,
-    description: 'Bookshelves, storage racks, display shelves'
+    label: 'Japanese',
+    icon: FaToriiGate,
+    description: ''
   },
   {
-    label: 'Shoes',
-    icon: TbShoe,
-    description: 'Sneakers, boots, sandals, high heels'
+    label: 'Korean',
+    icon: GiNoodles,
+    description: ''
   },
   {
-    label: 'Lighting',
-    icon: FaRegLightbulb,
-    description: 'Desk lamps, floor lamps, wall lamps, ceiling lights'
+    label: 'Mexican',
+    icon: GiTacos,
+    description: ''
   },
   {
-    label: 'Electronics',
-    icon: BiDesktop,
-    description: 'Computers, Tablets, TVs, headphones'
+    label: 'Italian',
+    icon: TbCheese,
+    description: ''
   },
   {
-    label: 'Books',
-    icon: BiBookBookmark,
-    description: 'Novels, textbooks, cookbooks, comic books'
+    label: 'Vietnamese',
+    icon: FaLeaf,
+    description: ''
   },
   {
-    label: 'Kitchenware',
-    icon: TbToolsKitchen2,
-    description: 'Pots, pans, cutlery, plates, glassware'
+    label: 'Breakfast',
+    icon: FaEgg,
+    description: ''
   },
   {
-    label: 'Food',
-    icon: MdOutlineFastfood,
-    description: 'Canned food, spices, snacks, drinks'
+    label: 'Café',
+    icon: FaCoffee,
+    description: ''
   },
   {
-    label: 'Cosmetics',
-    icon: MdFace3,
-    description: 'Makeup products, skincare products'
-  },
-  {
-    label: 'Sports',
-    icon: IoAmericanFootballOutline,
-    description: 'Football, Basketball, baseball, rackets, workout equipment'
-  },
-  {
-    label: 'Bike/Car',
-    icon: PiCarBold,
-    description: 'Cars, car accessories, car cleaning supplies'
-  },
-  {
-    label: 'Others',
-    icon: MdOutlineOtherHouses,
-    description: "Items that don't fit into the other categories"
+    label: 'Drinks',
+    icon: FaGlassMartiniAlt,
+    description: ''
   }
 ]
 
