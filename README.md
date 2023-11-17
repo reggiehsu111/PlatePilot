@@ -1,6 +1,4 @@
-![mtsa-marketplace-nextjs-banner](/public/images/website-card.jpg)
-
-# MTSA Marketplace
+# PlatePilot
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
