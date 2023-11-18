@@ -13,8 +13,8 @@ import getCurrentUser from './actions/getCurrentUser';
 const font = Nunito_Sans({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Marketplace',
-  description: 'buy and sell',
+  title: 'Plate Pilot',
+  description: 'Find the most related comment for your restaurant',
 }
 
 export default async function RootLayout({children}: {
