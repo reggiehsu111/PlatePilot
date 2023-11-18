@@ -1,0 +1,4 @@
+openai
+langchain>=0.0.205
+tiktoken
+nest_asyncio

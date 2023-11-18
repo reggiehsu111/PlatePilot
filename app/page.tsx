@@ -1,35 +1,31 @@
-import getItems, { IItemsParams } from "./actions/getItems";
+import getRestaurants, { IRestaurantsParams } from "./actions/getRestaurants";
 import getCurrentUser from "./actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
-import Container from './components/Container'
+import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
-import ItemsCard from "./components/items/ItemsCard";
-import CustomPagination from './components/Pagination'
+import RestaurantsCard from "./components/restaurants/RestaurantsCard";
+import CustomPagination from "./components/Pagination";
 import { EmptyStateMode } from "./types/constants";
 
-
 interface HomeProps {
-  searchParams: IItemsParams;
-};
-
+  searchParams: IRestaurantsParams;
+}
 
 export default async function Home({ searchParams }: HomeProps) {
-
   // Get all the items
   let result;
   let items = [];
   if (searchParams.category || searchParams.search || searchParams.page) {
-    result = await getItems(searchParams)
-    items = result.items
+    result = await getRestaurants(searchParams);
+    items = result.restaurants;
   } else {
-    result = await getItems({})
-    items = result.items
+    result = await getRestaurants({});
+    items = result.restaurants;
   }
-  
+
   const currentUser = await getCurrentUser();
 
-  const isHomeUrl =
-    !searchParams.category && !searchParams.search
+  const isHomeUrl = !searchParams.category && !searchParams.search;
 
   if (items.length == 0) {
     return (
@@ -39,7 +35,7 @@ export default async function Home({ searchParams }: HomeProps) {
           mode={EmptyStateMode.HOME}
         />
       </ClientOnly>
-    )
+    );
   }
 
   return (
@@ -48,15 +44,19 @@ export default async function Home({ searchParams }: HomeProps) {
         <div className="pt-28 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 xl:gap-6">
           {items.map((item) => {
             return (
-              <ItemsCard key={item.id} data={item} currentUser={currentUser} />
-            )
+              <RestaurantsCard
+                key={item.id}
+                data={item}
+                currentUser={currentUser}
+              />
+            );
           })}
         </div>
         <CustomPagination
-          totalItemsCount={result.totalItemsCount}
+          totalRestaurantsCount={result.totalRestaurantsCount}
           isHomeUrl={isHomeUrl}
         />
       </Container>
     </ClientOnly>
-  )
+  );
 }
