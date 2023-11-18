@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@hookform/resolvers": "^3.2.0",
     "@mui/material": "^5.13.6",
     "@mui/styled-engine-sc": "^5.12.0",
@@ -46,6 +47,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/google.maps": "^3.54.3",
+    "@types/react": "latest",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
     "prisma": "^4.16.1",

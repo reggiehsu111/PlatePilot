@@ -26,7 +26,6 @@ const ItemPage =  async ({params} : {params : IParams}) => {
 
   return (
     <ClientOnly>
-      {restaurant.name}
       <RestaurantClient restaurant={restaurant} currentUser={currentUser} />
     </ClientOnly>
   )
