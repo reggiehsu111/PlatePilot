@@ -1,20 +1,21 @@
-import { User, Item, Reservation } from '@prisma/client'
+import { User, Item, Reservation, Restaurant } from '@prisma/client'
 
-export type SafeItem = Omit<
-  Item,
-  "createdAt"
-> & {
-  createdAt: string;
+export type SafeItem = Omit<Item, 'createdAt'> & {
+  createdAt: string
+}
+
+export type SafeRestaurant = Omit<Restaurant, 'createdAt'> & {
+  // createdAt: string
 }
 
 export type SafeUser = Omit<
   User,
-  "createdAt" | "updatedAt" | "emailVerified"
+  'createdAt' | 'updatedAt' | 'emailVerified'
 > & {
-  createdAt: string;
-  updatedAt: string;
-  emailVerified: string | null | undefined;
-};
+  createdAt: string
+  updatedAt: string
+  emailVerified: string | null | undefined
+}
 
 
 export type SafeReservation = Omit<

@@ -92,3 +92,64 @@ model Reservation {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
+
+model Restaurant {
+ id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+ business_id         String?    @unique
+ name                String?
+ address             String?
+ city                String?
+ state               String?
+ postal_code         String?
+ latitude            Float?
+ longitude           Float?
+ stars               Float?
+ review_count        Int?
+ is_open             Int?
+ category            String?
+ reviews             Review[]
+
+
+ // New fields to match JSON content
+ bikeParking               Boolean? @map("BikeParking")
+ outdoorSeating            Boolean? @map("OutdoorSeating")
+ restaurantsReservations   Boolean? @map("RestaurantsReservations")
+ restaurantsPriceRange2    Int?    @map("RestaurantsPriceRange2")
+ businessParking           Json?   @map("BusinessParking") // JSON since it's a nested object
+ restaurantsAttire         String? @map("RestaurantsAttire")
+ restaurantsGoodForGroups  Boolean? @map("RestaurantsGoodForGroups")
+ wifi                      String? @map("WiFi")
+ ambience                  Json?   @map("Ambience") // JSON since it's a nested object
+ noiseLevel                String? @map("NoiseLevel")
+ caters                    Boolean? @map("Caters")
+ restaurantsTakeOut        Boolean? @map("RestaurantsTakeOut")
+ goodForMeal               Json?   @map("GoodForMeal") // JSON since it's a nested object
+ goodForKids               Boolean? @map("GoodForKids")
+ businessAcceptsCreditCards Boolean? @map("BusinessAcceptsCreditCards")
+ hasTV                     Boolean? @map("HasTV")
+ restaurantsDelivery       Boolean? @map("RestaurantsDelivery")
+ alcohol                   String? @map("Alcohol")
+ categories                String? // Already present, but ensure it can store multiple categories
+ hours                     Json?   @map("hours") // JSON since it's a nested object
+
+ serviceComments           Json?
+ environmentComments       Json?
+ foodQualityComments       Json?
+ priceComments             Json?
+ transportationComments    Json?
+
+ createdAt                DateTime? @default(now())
+ updatedAt                DateTime? @updatedAt
+}
+
+
+model Review {
+ id            String          @id @default(auto()) @map("_id") @db.ObjectId
+ content       String
+ restaurantId  String          @db.ObjectId
+ restaurant    Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+
+ createdAt     DateTime        @default(now())
+ updatedAt     DateTime        @updatedAt
+}

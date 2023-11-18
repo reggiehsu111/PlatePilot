@@ -73,6 +73,59 @@ Table Reservation {
   item Item [not null]
 }
 
+Table Restaurant {
+  id String [pk]
+  business_id String [unique]
+  name String
+  address String
+  city String
+  state String
+  postal_code String
+  latitude Float
+  longitude Float
+  stars Float
+  review_count Int
+  is_open Int
+  category String
+  reviews Review [not null]
+  bikeParking Boolean
+  outdoorSeating Boolean
+  restaurantsReservations Boolean
+  restaurantsPriceRange2 Int
+  businessParking Json
+  restaurantsAttire String
+  restaurantsGoodForGroups Boolean
+  wifi String
+  ambience Json
+  noiseLevel String
+  caters Boolean
+  restaurantsTakeOut Boolean
+  goodForMeal Json
+  goodForKids Boolean
+  businessAcceptsCreditCards Boolean
+  hasTV Boolean
+  restaurantsDelivery Boolean
+  alcohol String
+  categories String
+  hours Json
+  serviceComments Json
+  environmentComments Json
+  foodQualityComments Json
+  priceComments Json
+  transportationComments Json
+  createdAt DateTime [default: `now()`]
+  updatedAt DateTime
+}
+
+Table Review {
+  id String [pk]
+  content String [not null]
+  restaurantId String [not null]
+  restaurant Restaurant [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
 Ref: Account.userId > User.id [delete: Cascade]
 
 Ref: Item.userId > User.id [delete: Cascade]
@@ -80,3 +133,5 @@ Ref: Item.userId > User.id [delete: Cascade]
 Ref: Reservation.userId > User.id [delete: Cascade]
 
 Ref: Reservation.itemId - Item.id [delete: Cascade]
+
+Ref: Review.restaurantId > Restaurant.id [delete: Cascade]
