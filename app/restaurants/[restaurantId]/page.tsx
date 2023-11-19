@@ -1,16 +1,16 @@
-import getRestaurantById from '@/app/actions/getRestaurantById'
-import getCurrentUser from '@/app/actions/getCurrentUser';
-import ClientOnly from '@/app/components/ClientOnly';
-import EmptyState from '@/app/components/EmptyState';
-import RestaurantClient from './RestaurantClient'
-import { EmptyStateMode } from '@/app/types/constants';
+import getRestaurantById from "@/app/actions/getRestaurantById";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import ClientOnly from "@/app/components/ClientOnly";
+import EmptyState from "@/app/components/EmptyState";
+import RestaurantClient from "./RestaurantClient";
+import { EmptyStateMode } from "@/app/types/constants";
 
 interface IParams {
-  restaurantId?: string
+  restaurantId?: string;
 }
 
-const ItemPage =  async ({params} : {params : IParams}) => {
-  const restaurant = await getRestaurantById(params)
+const ItemPage = async ({ params }: { params: IParams }) => {
+  const restaurant = await getRestaurantById(params);
   const currentUser = await getCurrentUser();
 
   if (!restaurant) {
@@ -21,14 +21,14 @@ const ItemPage =  async ({params} : {params : IParams}) => {
           mode={EmptyStateMode.FULL_PAGE}
         />
       </ClientOnly>
-    )
+    );
   }
 
   return (
     <ClientOnly>
       <RestaurantClient restaurant={restaurant} currentUser={currentUser} />
     </ClientOnly>
-  )
-}
+  );
+};
 
 export default ItemPage;

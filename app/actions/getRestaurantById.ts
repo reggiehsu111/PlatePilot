@@ -6,19 +6,20 @@ interface IParams {
 
 export default async function getRestaurantById(params: IParams) {
   try {
-    const { restaurantId } = params
+    const { restaurantId } = params;
     const restaurant = await prisma.restaurant.findUnique({
       where: {
-        id: restaurantId
+        id: restaurantId,
       },
-    })
+    });
     if (!restaurant) {
-      return null
+      return null;
     }
     return {
       ...restaurant,
-    }
+    };
+    console.log("restaurant:", restaurant);
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(error);
   }
 }

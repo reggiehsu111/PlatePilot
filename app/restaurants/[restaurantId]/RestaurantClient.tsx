@@ -1,61 +1,62 @@
-'use client'
+"use client";
 
-import { SafeItem, SafeUser, SafeRestaurant } from '@/app/types'
-import { Reservation } from '@prisma/client'
-import { useState, useMemo, useCallback } from 'react'
-import { categories } from '@/app/components/navbar/Categories'
-import Container from '@/app/components/Container'
-import Footer from '@/app/components/Footer'
-import UpdateButton from '@/app/components/UpdateButton'
-import RestaurantInfo from './RestaurantInfo'
+import { SafeItem, SafeUser, SafeRestaurant } from "@/app/types";
+import { Reservation } from "@prisma/client";
+import { useState, useMemo, useCallback } from "react";
+import { categories } from "@/app/components/navbar/Categories";
+import Container from "@/app/components/Container";
+import Footer from "@/app/components/Footer";
+import UpdateButton from "@/app/components/UpdateButton";
+import RestaurantInfo from "./RestaurantInfo";
+import RestaurantReviews from "./RestaurantReviews";
 
-import useLoginModal from '@/app/hooks/useLoginModal'
-import useEditSellModal from '@/app/hooks/useEditSellModal'
-import EditSellModal from '@/app/components/modals/EditSellModal'
-import useSellModal from '@/app/hooks/useSellModal'
-import useReserveModal from '@/app/hooks/useReserveModal'
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useEditSellModal from "@/app/hooks/useEditSellModal";
+import EditSellModal from "@/app/components/modals/EditSellModal";
+import useSellModal from "@/app/hooks/useSellModal";
+import useReserveModal from "@/app/hooks/useReserveModal";
 
-import { Map } from '@/app/components/Map'
-interface ItemClientProps {
-  reservations?: Reservation[]
-  restaurant: SafeRestaurant
-  currentUser?: SafeUser | null
+import { Map } from "@/app/components/Map";
+interface RestaurantClientProps {
+  reservations?: Reservation[];
+  restaurant: SafeRestaurant;
+  currentUser?: SafeUser | null;
 }
 const TABS = [
-  'Service',
-  'Food Quality',
-  'Price',
-  'Transportation',
-  'Restaurant Environment'
-]
+  "Service",
+  "Food Quality",
+  "Price",
+  "Transportation",
+  "Restaurant Environment",
+];
 
-const ItemClient: React.FC<ItemClientProps> = ({
+const RestaurantClient: React.FC<RestaurantClientProps> = ({
   reservations,
   restaurant,
-  currentUser
+  currentUser,
 }) => {
-  const loginModal = useLoginModal()
-  const editSellModal = useEditSellModal()
+  const loginModal = useLoginModal();
+  const editSellModal = useEditSellModal();
 
-  const [activeTab, setActiveTab] = useState(TABS[0])
+  const [activeTab, setActiveTab] = useState(TABS[0]);
   const handleTabClick = (tabName: any) => {
-    setActiveTab(tabName)
-  }
+    setActiveTab(tabName);
+  };
 
   const onEdit = useCallback(() => {
     if (!currentUser) {
-      return loginModal.onOpen()
+      return loginModal.onOpen();
     }
 
     // open the reserve confirm modal
-    editSellModal.onOpen()
-  }, [currentUser, loginModal, editSellModal])
+    editSellModal.onOpen();
+  }, [currentUser, loginModal, editSellModal]);
 
   const category = useMemo(() => {
     return categories.find(
       (restaurants) => restaurants.label === restaurant.category
-    )
-  }, [restaurant.category])
+    );
+  }, [restaurant.category]);
 
   interface OpeningHours {
     Monday: string;
@@ -66,20 +67,20 @@ const ItemClient: React.FC<ItemClientProps> = ({
     Saturday: string;
     Sunday: string;
   }
-  
+
   function formatOpeningHours(hours: any): OpeningHours {
     // Default opening hours
     const defaultHours = {
-      Monday: 'Closed',
-      Tuesday: 'Closed',
-      Wednesday: 'Closed',
-      Thursday: 'Closed',
-      Friday: 'Closed',
-      Saturday: 'Closed',
-      Sunday: 'Closed',
+      Monday: "Closed",
+      Tuesday: "Closed",
+      Wednesday: "Closed",
+      Thursday: "Closed",
+      Friday: "Closed",
+      Saturday: "Closed",
+      Sunday: "Closed",
     };
-  
-    if (typeof hours === 'object' && hours !== null) {
+
+    if (typeof hours === "object" && hours !== null) {
       // Assume hours is an object with days as keys and string as values
       return {
         Monday: hours.Monday || defaultHours.Monday,
@@ -91,14 +92,14 @@ const ItemClient: React.FC<ItemClientProps> = ({
         Sunday: hours.Sunday || defaultHours.Sunday,
       };
     }
-  
+
     // If hours is not an object or is null, return default hours
     return defaultHours;
   }
-  
+
   // Usage in your component
   const openingHours = formatOpeningHours(restaurant.hours);
-  
+
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
@@ -110,15 +111,15 @@ const ItemClient: React.FC<ItemClientProps> = ({
             <div className="col-span-7">
               <RestaurantInfo
                 isOpen={restaurant.is_open || 0}
-                name={restaurant.name ?? ''}
+                name={restaurant.name ?? ""}
                 openingHours={openingHours}
                 address={
                   restaurant.address +
-                  ', ' +
+                  ", " +
                   restaurant.city +
-                  ', ' +
+                  ", " +
                   restaurant.state +
-                  ', ' +
+                  ", " +
                   restaurant.postal_code
                 }
                 stars={restaurant.stars || 0}
@@ -139,7 +140,7 @@ const ItemClient: React.FC<ItemClientProps> = ({
                   key={tabName}
                   onClick={() => handleTabClick(tabName)}
                   className={`px-4 py-2 rounded-xl ${
-                    activeTab === tabName ? 'bg-gray-200' : ''
+                    activeTab === tabName ? "bg-gray-200" : ""
                   }`}
                 >
                   {tabName}
@@ -147,13 +148,16 @@ const ItemClient: React.FC<ItemClientProps> = ({
               ))}
             </div>
             <div className="flex-grow">
-              {activeTab === 'Service' && <p>Content for Service</p>}
-              {activeTab === 'Food Quality' && <p>Content for Food Quality</p>}
-              {activeTab === 'Price' && <p>Content for Price</p>}
-              {activeTab === 'Transportation' && (
+              <RestaurantReviews reviews={restaurant.reviews} />
+            </div>
+            <div className="flex-grow">
+              {activeTab === "Service" && <p>Content for Service</p>}
+              {activeTab === "Food Quality" && <p>Content for Food Quality</p>}
+              {activeTab === "Price" && <p>Content for Price</p>}
+              {activeTab === "Transportation" && (
                 <p>Content for Food Quality</p>
               )}
-              {activeTab === 'Restaurant Environment' && (
+              {activeTab === "Restaurant Environment" && (
                 <p>Content for Restaurant Environment</p>
               )}
             </div>
@@ -161,7 +165,7 @@ const ItemClient: React.FC<ItemClientProps> = ({
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default ItemClient
+export default RestaurantClient;
