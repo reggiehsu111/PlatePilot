@@ -63,10 +63,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
       <div className="flex flex-row items-center gap-3">
         {currentUser && (
           <div className="flex items-center justify-between">
-            <div className="hidden md:block lg:text-base text-sm font-semibold text-[#FFFFFF]">
+            <div className="hidden md:block lg:text-base text-sm font-semibold text-[#000000]">
               Go EAT!
             </div>
-            <div className="hidden md:block md:text-base text-sm font-bold ml-2 text-[#FFFFFF]">
+            <div className="hidden md:block md:text-base text-sm font-bold ml-2 text-[#000000]">
               {currentUser.name}
             </div>
           </div>
