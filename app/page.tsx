@@ -41,7 +41,7 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <ClientOnly>
       <Container>
-        <div className="pt-28 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 xl:gap-6">
+        <div className="pt-32 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 xl:gap-6">
           {restaurants.map((restaurant) => {
             return (
               <RestaurantsCard

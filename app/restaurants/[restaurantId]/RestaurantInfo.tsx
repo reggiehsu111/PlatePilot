@@ -4,8 +4,8 @@ import StarRating from '../../components/StarRating'
 import {
   MdOutlineHouse,
   MdOutlineCalendarToday,
+  MdOutlineFoodBank
 } from 'react-icons/md'
-
 interface OpeningHours {
   Monday: string
   Tuesday: string
@@ -72,23 +72,24 @@ const RestaurantInfo: React.FC<RestaurantInfoProps> = ({
       </div>
 
       {/* Category */}
-      <div className="flex items-center justify-start">
-        <div className="text-lg">
-          Catagories: {categories}
-        </div>
+      <div className="flex items-center justify-start gap-2">
+        <MdOutlineFoodBank size={26} />
+        <div className="text-lg">{categories}</div>
       </div>
 
       {/* Opening Hours for the Week */}
-      <div className='flex flex-col gap-2'>
-        <div className='flex flex-row gap-2 items-center'>
+      <div className="flex flex-col gap-2 text-lg">
+        <div className="flex flex-row gap-2 items-center">
           <MdOutlineCalendarToday size={26} />
-          <div className='flex font-bold'>Opening Hours: </div>
+          <div className="flex">Opening Hours: </div>
         </div>
         <ul>
           {Object.entries(openingHours).map(([day, hours]) => (
             <li key={day} className="flex">
               {/* Adding margin to the right of the day name span */}
-              <span className="pl-6 flex-none w-20 font-semibold mr-10">{day}</span>
+              <span className="pl-6 flex-none w-20 font-semibold mr-10">
+                {day}
+              </span>
               <span>: {hours ? formatOpeningHours(hours) : 'Closed'}</span>
             </li>
           ))}

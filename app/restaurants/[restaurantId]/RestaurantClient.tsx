@@ -19,6 +19,8 @@ import useReserveModal from "@/app/hooks/useReserveModal";
 import Image from "next/image";
 
 import { v4 as uuidv4 } from "uuid";
+import SaveButton from "@/app/components/SaveButton";
+
 
 interface RestaurantClientProps {
   reservations?: Reservation[];
@@ -172,23 +174,28 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
           <div className="flex flex-col pt-10 gap-8">
             {/* Images */}
             <div className=" flex w-full h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden rounded-2xl relative">
-              <Image fill src={ default_image } alt={restaurant.name || ""} className="object-cover w-full" />
+              <Image
+                fill
+                src={default_image}
+                alt={restaurant.name || ''}
+                className="object-cover w-full"
+              />
             </div>
 
             {/* Name and Map */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 ">
-              <div className="col-span-6">
+              <div className="col-span-5">
                 <RestaurantInfo
                   isOpen={restaurant.is_open || 0}
-                  name={restaurant.name ?? ""}
+                  name={restaurant.name ?? ''}
                   openingHours={openingHours}
                   address={
                     restaurant.address +
-                    ", " +
+                    ', ' +
                     restaurant.city +
-                    ", " +
+                    ', ' +
                     restaurant.state +
-                    ", " +
+                    ', ' +
                     restaurant.postal_code
                   }
                   categories={restaurant.categories}
@@ -196,64 +203,68 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
                 />
               </div>
 
-            {/* Google Maps - Colin */}
-            <div className="col-span-6">
-              <iframe
-                width="100%"
-                height="500"
-                src={`https://www.google.com/maps/embed/v1/place?key=${gmap}&q=${restaurant.latitude},${restaurant.longitude}&zoom=18`}
-              ></iframe>
-            </div>
-          </div>
+              <div className="col-span-1">
+                <SaveButton
+                  itemId={restaurant.id}
+                  currentUser={currentUser}
+                />
+              </div>
 
-          {/* Tabs for Reviews */}
-          <div className="flex mb-4 justify-center">
-            {TABS.map((tabName) => (
-              <button
-                key={tabName}
-                onClick={() => handleTabClick(tabName)}
-                className={`px-4 py-2 rounded-xl ${
-                  activeTab === tabName ? "bg-gray-200" : ""
-                }`}
-              >
-                {tabName}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-col">
-            <div className="grid grid-cols-2">
-              <div className="text-center text-lg">Positive</div>
-              <div className="text-center text-lg">Negative</div>
+              {/* Google Map */}
+              <div className="col-span-6">
+                <iframe
+                  width="100%"
+                  height="500"
+                  src={`https://www.google.com/maps/embed/v1/place?key=${gmap}&q=${restaurant.latitude},${restaurant.longitude}&zoom=18`}
+                ></iframe>
+              </div>
             </div>
-            <div className="flex-grow overflow-x-auto">
-              {activeTab === "Service" && (
-                <RestaurantResults {...serviceComments} />
-              )}
-              {activeTab === "Food Quality" && (
-                <RestaurantResults {...tasteComments} />
-              )}
-              {activeTab === "Price" && (
-                <RestaurantResults {...priceComments} />
-              )}
-              {activeTab === "Transportation" && (
-                <RestaurantResults {...locationComments} />
-              )}
-              {activeTab === "Restaurant Environment & Hygiene" && (
-                <RestaurantResults {...hygieneComments} />
-              )}
+
+            {/* Tabs for Reviews */}
+            <div className="flex mb-4 justify-center">
+              {TABS.map((tabName) => (
+                <button
+                  key={tabName}
+                  onClick={() => handleTabClick(tabName)}
+                  className={`px-4 py-2 rounded-xl text-lg ${
+                    activeTab === tabName ? 'bg-gray-200 font-bold' : ''
+                  }`}
+                >
+                  {tabName}
+                </button>
+              ))}
             </div>
-          </div>
-          <div className="text-center text-lg">All Reviews</div>
-          <div className="flex flex-col overflow-x-auto">
-            <RestaurantReviews
-        
-              reviews={formattedReviews}
-            />
+            <div className="flex flex-col">
+              <div className="grid grid-cols-2">
+                <div className="text-center text-lg">Positive</div>
+                <div className="text-center text-lg">Negative</div>
+              </div>
+              <div className="flex-grow overflow-x-auto">
+                {activeTab === 'Service' && (
+                  <RestaurantResults {...serviceComments} />
+                )}
+                {activeTab === 'Food Quality' && (
+                  <RestaurantResults {...tasteComments} />
+                )}
+                {activeTab === 'Price' && (
+                  <RestaurantResults {...priceComments} />
+                )}
+                {activeTab === 'Transportation' && (
+                  <RestaurantResults {...locationComments} />
+                )}
+                {activeTab === 'Restaurant Environment & Hygiene' && (
+                  <RestaurantResults {...hygieneComments} />
+                )}
+              </div>
+            </div>
+            <div className="text-center text-lg">All Reviews</div>
+            <div className="flex flex-col overflow-x-auto">
+              <RestaurantReviews reviews={formattedReviews} />
+            </div>
           </div>
         </div>
-      </div>
-    </Container>
-  );
+      </Container>
+    )
 };
 
 export default RestaurantClient;
