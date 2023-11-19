@@ -246,8 +246,8 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
           <div className="text-center text-lg">All Reviews</div>
           <div className="flex flex-col overflow-x-auto">
             <RestaurantReviews
-              className="flex-grow"
-              reviews={restaurant.reviews}
+              
+              reviews={formattedReviews}
             />
           </div>
         </div>
