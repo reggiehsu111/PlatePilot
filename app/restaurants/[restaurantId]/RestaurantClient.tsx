@@ -9,6 +9,7 @@ import Footer from "@/app/components/Footer";
 import UpdateButton from "@/app/components/UpdateButton";
 import RestaurantInfo from "./RestaurantInfo";
 import RestaurantReviews from "./RestaurantReviews";
+import RestaurantResults from "./RestaurantResults";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useEditSellModal from "@/app/hooks/useEditSellModal";
@@ -29,7 +30,7 @@ const TABS = [
   "Food Quality",
   "Price",
   "Transportation",
-  "Restaurant Environment",
+  "Restaurant Environment & Hygiene",
 ];
 
 const RestaurantClient: React.FC<RestaurantClientProps> = ({
@@ -105,8 +106,6 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
     return defaultHours;
   }
 
-  
-
   function formatReviews(reviews: any): Review[] | null {
     const restaurantId = uuidv4();
     if (
@@ -130,7 +129,25 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   const openingHours = formatOpeningHours(restaurant.hours);
   const formattedReviews = formatReviews(restaurant.reviews);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY;
-  const default_image = restaurant.image || '/images/sold_mid.png'
+  const default_image = restaurant.image || "/images/sold_mid.png";
+  const parseComments = (type, restaurant) => {
+    const posComments = restaurant.results[type].Positive.map(
+      (result) => restaurant.reviews[result - 1].text
+    );
+    const negComments = restaurant.results[type].Negative.map(
+      (result) => restaurant.reviews[result - 1].text
+    );
+    return {
+      Positive: posComments,
+      Negative: negComments,
+      Score: restaurant.results[type].Score,
+    };
+  };
+  const serviceComments = parseComments("Service", restaurant);
+  const hygieneComments = parseComments("Hygiene", restaurant);
+  const tasteComments = parseComments("Taste", restaurant);
+  const locationComments = parseComments("Location", restaurant);
+  const priceComments = parseComments("Price", restaurant);
 
   return (
     <Container>
@@ -138,7 +155,12 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
         <div className="flex flex-col pt-10 gap-8">
           {/* Images */}
           <div className=" flex w-full h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden rounded-2xl relative">
-            <Image fill src={ default_image } alt={restaurant.name || ""} className="object-cover w-full" />
+            <Image
+              fill
+              src={default_image}
+              alt={restaurant.name || ""}
+              className="object-cover w-full"
+            />
           </div>
 
           {/* Name and Map */}
@@ -171,41 +193,50 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
               ></iframe>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex text-lg font-bold">Reviews</div>
-            <div className="flex flex-col overflow-x-auto">
-              <RestaurantReviews
-                reviews={formattedReviews}
-              />
-            </div>
-          </div>
 
           {/* Tabs for Reviews */}
-          <div className="flex flex-col overflow-x-auto">
-            <div className="flex mb-4 text-lg">
-              {TABS.map((tabName) => (
-                <button
-                  key={tabName}
-                  onClick={() => handleTabClick(tabName)}
-                  className={`px-4 py-2 rounded-xl ${
-                    activeTab === tabName ? "bg-gray-200 font-bold" : ""
-                  }`}
-                >
-                  {tabName}
-                </button>
-              ))}
+          <div className="flex mb-4 justify-center">
+            {TABS.map((tabName) => (
+              <button
+                key={tabName}
+                onClick={() => handleTabClick(tabName)}
+                className={`px-4 py-2 rounded-xl ${
+                  activeTab === tabName ? "bg-gray-200" : ""
+                }`}
+              >
+                {tabName}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-col">
+            <div className="grid grid-cols-2">
+              <div className="text-center text-lg">Positive</div>
+              <div className="text-center text-lg">Negative</div>
             </div>
-            <div className="flex-grow">
-              {activeTab === "Service" && <p>Content for Service</p>}
-              {activeTab === "Food Quality" && <p>Content for Food Quality</p>}
-              {activeTab === "Price" && <p>Content for Price</p>}
+            <div className="flex-grow overflow-x-auto">
+              {activeTab === "Service" && (
+                <RestaurantResults results={serviceComments} />
+              )}
+              {activeTab === "Food Quality" && (
+                <RestaurantResults results={tasteComments} />
+              )}
+              {activeTab === "Price" && (
+                <RestaurantResults results={priceComments} />
+              )}
               {activeTab === "Transportation" && (
-                <p>Content for Food Quality</p>
+                <RestaurantResults results={locationComments} />
               )}
-              {activeTab === "Restaurant Environment" && (
-                <p>Content for Restaurant Environment</p>
+              {activeTab === "Restaurant Environment & Hygiene" && (
+                <RestaurantResults results={hygieneComments} />
               )}
             </div>
+          </div>
+          <div className="text-center text-lg">All Reviews</div>
+          <div className="flex flex-col overflow-x-auto">
+            <RestaurantReviews
+              className="flex-grow"
+              reviews={restaurant.reviews}
+            />
           </div>
         </div>
       </div>

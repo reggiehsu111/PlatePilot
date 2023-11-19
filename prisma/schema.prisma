@@ -110,6 +110,7 @@ model Restaurant {
  category            String?
  reviews             Json?
  category_array      String[]
+ results             Json?
 
 
  // New fields to match JSON content

@@ -90,6 +90,7 @@ Table Restaurant {
   category String
   reviews Json
   category_array String[] [not null]
+  results Json
   bikeParking Boolean
   outdoorSeating Boolean
   restaurantsReservations Boolean
