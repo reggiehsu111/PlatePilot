@@ -14,7 +14,7 @@ export default async function getRestaurants(params: IRestaurantParams) {
     let query: any = {};
 
     if (category) {
-      query.category = category;
+      query.category_array = { has: category };
     }
 
     if (search) {
