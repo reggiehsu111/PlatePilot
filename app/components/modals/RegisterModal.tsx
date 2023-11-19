@@ -45,7 +45,7 @@ const RegisterModal = () => {
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
-        title="Welcome to marketplace"
+        title="Welcome to PlatePilot"
         subtitle="Please register to continue"
         icon={PiHandWavingBold}
         center
