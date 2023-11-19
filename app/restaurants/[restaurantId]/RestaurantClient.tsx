@@ -16,11 +16,11 @@ import EditSellModal from "@/app/components/modals/EditSellModal";
 import useSellModal from "@/app/hooks/useSellModal";
 import useReserveModal from "@/app/hooks/useReserveModal";
 
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 interface RestaurantClientProps {
   reservations?: Reservation[];
-  restaurant: SafeRestaurant
+  restaurant: SafeRestaurant;
   currentUser?: SafeUser | null;
 }
 const TABS = [
@@ -106,24 +106,29 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
 
   function formatReviews(reviews: any): Review[] | null {
     const restaurantId = uuidv4();
-    if (Array.isArray(reviews) && reviews.every(review => typeof review === 'object' && 'id' in review && 'text' in review)) {
-      return reviews.map(review => ({
+    if (
+      Array.isArray(reviews) &&
+      reviews.every(
+        (review) =>
+          typeof review === "object" && "id" in review && "text" in review
+      )
+    ) {
+      return reviews.map((review) => ({
         id: review.id,
         text: review.text,
-        restaurantId: restaurantId
+        restaurantId: restaurantId,
       }));
     }
-  
+
     return null;
   }
-  
 
   // Usage in your component
   const openingHours = formatOpeningHours(restaurant.hours);
   const formattedReviews = formatReviews(restaurant.reviews);
-  const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY
-  console.log(restaurant)
-  
+  const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY;
+  console.log(restaurant);
+
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
@@ -156,9 +161,15 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
                 width="100%"
                 height="500"
                 src={`https://www.google.com/maps/embed/v1/place?key=${gmap}&q=${restaurant.latitude},${restaurant.longitude}&zoom=18`}
-              >
-              </iframe>
+              ></iframe>
             </div>
+          </div>
+          <div>Reviews</div>
+          <div className="flex flex-col overflow-x-auto">
+            <RestaurantReviews
+              className="flex-grow"
+              reviews={restaurant.reviews}
+            />
           </div>
 
           {/* Tabs for Reviews */}
@@ -175,9 +186,6 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
                   {tabName}
                 </button>
               ))}
-            </div>
-            <div className="flex-grow">
-              <RestaurantReviews reviews={formattedReviews} />
             </div>
             <div className="flex-grow">
               {activeTab === "Service" && <p>Content for Service</p>}

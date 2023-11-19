@@ -18,9 +18,11 @@ const RestaurantReviews: React.FC<RestaurantReviewsProps> = ({ reviews }) => {
   }
 
   return (
-    <div>
+    <div className="h-96">
       {reviews.map((review) => (
-        <div key={`${review.restaurantId}-${review.id}`}>{review.text}</div>
+        <div className="p-10 my-4 bg-indigo-100 rounded-lg" key={review.id}>
+          {review.text}
+        </div>
       ))}
     </div>
   );
