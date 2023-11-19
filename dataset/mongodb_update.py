@@ -21,7 +21,7 @@ count = 0
 
 categories = [
     "Breakfast",
-    "Bubble",
+    "Drink",
     "Burger",
     "Cafe",
     "Chinese",
@@ -35,6 +35,7 @@ categories = [
 ]
 
 
+count = 0
 for category in categories:
     # Replace 'category' with your specific category
     with open(f"categories/{category}_data.json", "r") as file:
@@ -52,6 +53,8 @@ for category in categories:
             new_values = {"$set": {"results": results}}
             collection.update_one(myquery, new_values)
             print("Successfully update id:", business_id)
+            count += 1
 
         except FileNotFoundError:
             print(f"No results file found for business ID: {business_id}")
+print(count)

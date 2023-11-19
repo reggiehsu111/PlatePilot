@@ -21,7 +21,7 @@ count = 0
 
 categories = [
     "Breakfast",
-    "Bubble",
+    "Drink",
     "Burger",
     "Cafe",
     "Chinese",
@@ -47,6 +47,8 @@ for category in categories:
         new_cat = [x.strip() for x in new_cat]
         cat_data = []
         for cat in new_cat:
+            if "Bubble" in cat:
+                cat = "Drink"
             for c in categories:
                 if c in cat:
                     cat_data.append(c)

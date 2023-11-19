@@ -10,11 +10,7 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/yi-cheng-liu/mtsa-marketplace)
 
-This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) website aimed at enhancing the user experience for MTSA's second-hand marketplace on Facebook. Since every seller have to post a PowerPoint for selling the items. Here are some of the issues I focused on improving:
-
-1. The need to open a PowerPoint presentation to view items.
-2. Lack of categorization for items.
-3. Items that have been sold but are still listed due to outdated information.
+This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) website aimed at enhancing the user experience for restaurant review websites like yelp.
 
 ## Table of Contents
 
@@ -28,16 +24,7 @@ This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com
 
 ## Motivation
 
-MTSA Marketplace is a platform for buying and selling items within the MTSA (Michigan Taiwanese Student Association) community. This project aims to simplify the process of trading second-hand goods by providing a user-friendly interface equipped with search and reserve functionalities.
-
 ## Features
-
-- 🛏️ Item Listing, add items, edit, and delete items
-- 🔍 Dynamic Search and filter items by category
-- ⚠️ Real-time Notifications
-- 🔖 Saved Page for favorite items
-- 📦 Order Page for monitoring reservations
-- 🧑🏼 Update personal info and manage item listings and reservations
 
 ##### Core
 
@@ -72,7 +59,7 @@ MTSA Marketplace is a platform for buying and selling items within the MTSA (Mic
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yi-cheng-liu/mtsa-marketplace.git
+   git clone git@github.com:reggiehsu111/PlatePilot.git
    ```
 2. Navigate to the project directory
    ```bash
@@ -84,6 +71,7 @@ MTSA Marketplace is a platform for buying and selling items within the MTSA (Mic
    ```
 4. Setup .env
    ```bash
+   OPENAI_API_KEY=
    DATABASE_URL=
    NEXTAUTH_SECRET="NEXTAUTH_SECRET"
    GITHUB_ID=
@@ -91,6 +79,7 @@ MTSA Marketplace is a platform for buying and selling items within the MTSA (Mic
    GOOGLE_ID=
    GOOGLE_SECRET=
    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+   NEXT_PUBLIC_GMAPS_API_KEY=
    ```
 5. Setup Prisma
    ```bash
@@ -104,34 +93,6 @@ MTSA Marketplace is a platform for buying and selling items within the MTSA (Mic
 
 ## Demo
 
-#### Home Page
-
-![home page](/public/images/page_intro/1_home_page.png)
-
-#### Add an Item
-
-|                    Select Category                    |                      Enter Details                      |                     Upload picture                     |
-| :---------------------------------------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
-| ![Category](/public/images/page_intro/2_category.png) | ![Enter details](/public/images/page_intro/2_title.png) | ![Upload Picture](/public/images/page_intro/2_pic.png) |
-
-#### Item Page
-
-|                         Item Page                         |                             Confirm reservation                             |
-| :-------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| ![Item Page  ](/public/images/page_intro/3_item_page.jpg) | ![Confirm reservation](/public/images/page_intro/3_confirm_reservation.png) |
-
-#### Order Page & Saved Page
-
-|                        Order Page                         |                        Saved Page                         |
-| :-------------------------------------------------------: | :-------------------------------------------------------: |
-| ![Order Page](/public/images/page_intro/5_order_page.png) | ![Saved Page ](/public/images/page_intro/4_save_page.png) |
-
-#### Profile Page
-
-|                       Profile Page                       |                        Reserved Items                         |
-| :------------------------------------------------------: | :-----------------------------------------------------------: |
-| ![Profile Page](/public/images/page_intro/5_profile.png) | ![Saved Page ](/public/images/page_intro/5_reserved_item.png) |
-
 ## License
 
 [MIT](https://github.com/yi-cheng-liu/mtsa-marketplace/blob/main/LICENSE) © Yi-Cheng Liu
@@ -142,5 +103,3 @@ For more information or contributions, you can reach us at:
 Yi-Cheng Liu, Email: whsjerryliu@gmail.com or liuyiche@umich.edu
 
 ## Acknowledgments
-
-This project has been an incredible learning journey in React and great code organization. Huge thanks to Antonio who is the creator of the [Airbnb clone](https://www.youtube.com/watch?v=c_-b_isI4vg&ab_channel=CodeWithAntonio) on Youtube. The insights and skills I gained from his course served as the foundation for this project. Also, thanks to the MTSA community for providing me the opportunity to build this project.

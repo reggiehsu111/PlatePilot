@@ -1,0 +1,1 @@
+{"Service": {"Positive": [6, 10], "Negative": [1], "Score": 6.0}, "Hygiene": {"Positive": [3], "Negative": [], "Score": 7.0}, "Taste": {"Positive": [2, 3, 4, 5, 10], "Negative": [1, 8], "Score": 6.5}, "Location": {"Positive": [], "Negative": [], "Score": 7.0}, "Price": {"Positive": [3, 9], "Negative": [7, 8], "Score": 6.0}}
