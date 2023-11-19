@@ -3,8 +3,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 import { AiOutlineSearch } from "react-icons/ai";
 import { format } from "path";
+interface Review {
+  id: number;
+  text: string;
+  restaurantId: string;
+}
 
-const SearchGpt: React.FC<AvatarProps> = ({ formattedReviews }) => {
+interface SearchGptProps {
+  formattedReviews: Review[] | null;
+}
+
+const SearchGpt: React.FC<SearchGptProps> = ({ formattedReviews }) => {
   const [search, setsearch] = useState("");
   const [results, setResults] = useState("");
   const router = useRouter();
@@ -18,48 +27,31 @@ const SearchGpt: React.FC<AvatarProps> = ({ formattedReviews }) => {
   ) => {
     event.preventDefault();
     let reviews = "";
-    for (var i = 0; i < 20; ++i) {
-      reviews += formattedReviews[i].text;
-      reviews += ",\n";
+    if (formattedReviews) {
+      for (var i = 0; i < Math.min(20, formattedReviews.length); ++i) {
+        reviews += formattedReviews[i].text;
+        reviews += ",\n";
+      }
     }
 
-    try {
-      var responseClone;
-      fetch("/api/gpt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: search, reviews: reviews }),
+    fetch("/api/gpt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: search, reviews: reviews }),
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          responseClone = response.clone();
-          return response.json();
-        })
-        .then(
-          (data) => {
-            setResults(data.result);
-          },
-          (rejectionReason) => {
-            console.log(
-              "Error parsing JSON from response:",
-              rejectionReason,
-              responseClone
-            ); // 4
-            responseClone
-              .text() // 5
-              .then(function (bodyText) {
-                console.log(
-                  "Received the following instead of valid JSON:",
-                  bodyText
-                ); // 6
-              });
-          }
-        );
-    } catch (error) {
-      console.log(error.message);
-      alert(error.message);
-    }
+      .then(
+        (data) => {
+          setResults(data.result);
+        },
+        (rejectionReason) => {
+          console.log("Error parsing JSON from response:", rejectionReason); // 4
+        }
+      );
   };
 
   const resultArray = results.split("\n");
@@ -88,7 +80,7 @@ const SearchGpt: React.FC<AvatarProps> = ({ formattedReviews }) => {
       </form>
       <div>
         {resultArray.map((result) => (
-          <div>{result}</div>
+          <div key={result}>{result}</div>
         ))}
       </div>
     </div>

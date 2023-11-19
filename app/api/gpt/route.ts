@@ -31,16 +31,10 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     // Handle any errors that occur during the request
-    if (error.response) {
-      console.error(error.response.status, error.response.data);
-      return NextResponse.json({ error: error.response.data }, { status: 500 });
-    } else {
-      console.error(`Error with OpenAI API request: ${error.message}`);
-      return NextResponse.json(
-        { error: "An error occurred during your request." },
-        { status: 500 }
-      );
-    }
+    return NextResponse.json(
+      { error: "An error occurred during your request." },
+      { status: 500 }
+    );
   }
 }
 import { NextResponse } from "next/server";

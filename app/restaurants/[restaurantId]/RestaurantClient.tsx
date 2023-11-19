@@ -217,10 +217,7 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
               ></iframe>
             </div>
           </div>
-          <SearchGpt
-            className="col-span-1"
-            formattedReviews={formattedReviews}
-          />
+          <SearchGpt formattedReviews={formattedReviews} />
 
           {/* Tabs for Reviews */}
           <div className="flex mb-4 justify-center">
