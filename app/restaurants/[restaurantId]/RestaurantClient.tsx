@@ -151,6 +151,7 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
                   ", " +
                   restaurant.postal_code
                 }
+                categories={restaurant.categories}
                 stars={restaurant.stars || 0}
               />
             </div>
