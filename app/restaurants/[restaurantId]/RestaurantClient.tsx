@@ -33,6 +33,12 @@ const TABS = [
   "Restaurant Environment & Hygiene",
 ];
 
+interface RestaurantResultsProps {
+  Positive: string[] | null;
+  Negative: string[] | null;
+  Score: number | null;
+}
+
 const RestaurantClient: React.FC<RestaurantClientProps> = ({
   reservations,
   restaurant,
@@ -130,12 +136,22 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   const formattedReviews = formatReviews(restaurant.reviews);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY;
   const default_image = restaurant.image || "/images/sold_mid.png";
-  const parseComments = (type, restaurant) => {
+  const parseComments = (
+    type: string,
+    restaurant: any
+  ): RestaurantResultsProps => {
+    if (!restaurant.results) {
+      return {
+        Positive: null,
+        Negative: null,
+        Score: null,
+      };
+    }
     const posComments = restaurant.results[type].Positive.map(
-      (result) => restaurant.reviews[result - 1].text
+      (result: number) => restaurant.reviews[result - 1].text
     );
     const negComments = restaurant.results[type].Negative.map(
-      (result) => restaurant.reviews[result - 1].text
+      (result: number) => restaurant.reviews[result - 1].text
     );
     return {
       Positive: posComments,
@@ -215,19 +231,19 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
             </div>
             <div className="flex-grow overflow-x-auto">
               {activeTab === "Service" && (
-                <RestaurantResults results={serviceComments} />
+                <RestaurantResults {...serviceComments} />
               )}
               {activeTab === "Food Quality" && (
-                <RestaurantResults results={tasteComments} />
+                <RestaurantResults {...tasteComments} />
               )}
               {activeTab === "Price" && (
-                <RestaurantResults results={priceComments} />
+                <RestaurantResults {...priceComments} />
               )}
               {activeTab === "Transportation" && (
-                <RestaurantResults results={locationComments} />
+                <RestaurantResults {...locationComments} />
               )}
               {activeTab === "Restaurant Environment & Hygiene" && (
-                <RestaurantResults results={hygieneComments} />
+                <RestaurantResults {...hygieneComments} />
               )}
             </div>
           </div>
