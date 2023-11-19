@@ -135,7 +135,8 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   const openingHours = formatOpeningHours(restaurant.hours);
   const formattedReviews = formatReviews(restaurant.reviews);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY;
-  const default_image = restaurant.image || "/images/sold_mid.png";
+  const businessId = restaurant.business_id
+  const default_image = '/images/restaurant_images/' + businessId + "/image.jpg";
   const parseComments = (
     type: string,
     restaurant: any
@@ -165,40 +166,35 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   const locationComments = parseComments("Location", restaurant);
   const priceComments = parseComments("Price", restaurant);
 
-  return (
-    <Container>
-      <div className="max-w-screen-lg mx-auto">
-        <div className="flex flex-col pt-10 gap-8">
-          {/* Images */}
-          <div className=" flex w-full h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden rounded-2xl relative">
-            <Image
-              fill
-              src={default_image}
-              alt={restaurant.name || ""}
-              className="object-cover w-full"
-            />
-          </div>
-
-          {/* Name and Map */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 ">
-            <div className="col-span-6">
-              <RestaurantInfo
-                isOpen={restaurant.is_open || 0}
-                name={restaurant.name ?? ""}
-                openingHours={openingHours}
-                address={
-                  restaurant.address +
-                  ", " +
-                  restaurant.city +
-                  ", " +
-                  restaurant.state +
-                  ", " +
-                  restaurant.postal_code
-                }
-                categories={restaurant.categories}
-                stars={restaurant.stars || 0}
-              />
+    return (
+      <Container>
+        <div className="max-w-screen-lg mx-auto">
+          <div className="flex flex-col pt-10 gap-8">
+            {/* Images */}
+            <div className=" flex w-full h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden rounded-2xl relative">
+              <Image fill src={ default_image } alt={restaurant.name || ""} className="object-cover w-full" />
             </div>
+
+            {/* Name and Map */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 ">
+              <div className="col-span-6">
+                <RestaurantInfo
+                  isOpen={restaurant.is_open || 0}
+                  name={restaurant.name ?? ""}
+                  openingHours={openingHours}
+                  address={
+                    restaurant.address +
+                    ", " +
+                    restaurant.city +
+                    ", " +
+                    restaurant.state +
+                    ", " +
+                    restaurant.postal_code
+                  }
+                  categories={restaurant.categories}
+                  stars={restaurant.stars || 0}
+                />
+              </div>
 
             {/* Google Maps - Colin */}
             <div className="col-span-6">

@@ -76,7 +76,7 @@ const ItemsCard: React.FC<ItemsCardProps> = ({ data, reservation, currentUser, d
             />
             {isSold && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <Image fill alt="sold overlay" src="/images/sold_mid.png"
+                <Image fill alt="sold overlay" src="/images/platepilot.png"
                   className="object-contain object-center w-full h-full" />
               </div>
             )}

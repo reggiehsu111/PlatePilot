@@ -40,9 +40,9 @@ const RestaurantsCard: React.FC<RestaurantsCardProps> = ({
     },
     [onAction, actionId, disabled]
   );
-
-  const default_image = data.image || '/images/sold_mid.png'
-
+  
+  const businessId = data.business_id
+  const default_image = '/images/restaurant_images/' + businessId + '/image.jpg'
 
   return (
     <div className="flex flex-col justify-between h-full">
@@ -56,7 +56,7 @@ const RestaurantsCard: React.FC<RestaurantsCardProps> = ({
             <Image
               fill
               alt={data.name || "default"}
-              src={data.image || default_image}
+              src={default_image}
               className="object-cover h-full w-full group-hover:scale-110 transition"
             />
           </div>
