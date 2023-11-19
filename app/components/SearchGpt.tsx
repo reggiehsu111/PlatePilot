@@ -67,7 +67,7 @@ const SearchGpt: React.FC<SearchGptProps> = ({ formattedReviews }) => {
           placeholder="Search Topics"
           value={search}
           onChange={handleSearchChange}
-          className="p-2 rounded-l-3xl w-100 xl:w-100 2xl:w-100 focus:outline-none"
+          className="p-2 rounded-l-3xl w-full focus:outline-none"
         />
         <button
           type="submit"
