@@ -21,6 +21,8 @@ import { GiTacos } from 'react-icons/gi'
 import { PiBowlFood } from 'react-icons/pi'
 import { CiBowlNoodles } from 'react-icons/ci'
 import { TbCheese } from 'react-icons/tb'
+import { LuEggFried } from "react-icons/lu";
+
 
 
 export const categories = [
@@ -71,16 +73,16 @@ export const categories = [
   },
   {
     label: 'Breakfast',
-    icon: FaEgg,
+    icon: LuEggFried,
     description: ''
   },
   {
-    label: 'Café',
+    label: 'Cafe',
     icon: FaCoffee,
     description: ''
   },
   {
-    label: 'Drinks',
+    label: 'Drink',
     icon: FaGlassMartiniAlt,
     description: ''
   }

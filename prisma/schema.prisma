@@ -96,7 +96,7 @@ model Reservation {
 model Restaurant {
  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
  business_id         String?    @unique
- name                String?
+ name                String
  address             String?
  city                String?
  state               String?
@@ -106,6 +106,7 @@ model Restaurant {
  stars               Float?
  review_count        Int?
  is_open             Int?
+ image               String?
  category            String?
  reviews             Json?
  category_array      String[]

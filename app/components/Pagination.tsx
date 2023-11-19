@@ -69,7 +69,6 @@ const CustomPagination: React.FC<PaginationParams> = ({
           />
         )}
       </div>
-      {isHomeUrl && page === maxPage && <SoldButton />}
     </div>
   )
 }

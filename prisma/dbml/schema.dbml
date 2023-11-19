@@ -76,7 +76,7 @@ Table Reservation {
 Table Restaurant {
   id String [pk]
   business_id String [unique]
-  name String
+  name String [not null]
   address String
   city String
   state String
@@ -86,6 +86,7 @@ Table Restaurant {
   stars Float
   review_count Int
   is_open Int
+  image String
   category String
   reviews Json
   category_array String[] [not null]

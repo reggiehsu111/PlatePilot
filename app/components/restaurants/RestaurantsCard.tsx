@@ -41,9 +41,26 @@ const RestaurantsCard: React.FC<RestaurantsCardProps> = ({
     [onAction, actionId, disabled]
   );
 
+  const default_image = data.image || '/images/sold_mid.png'
+
+
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="flex flex-col gap-2 w-full">
+        <WrapperElement
+          href={isSold ? undefined : `/restaurants/${data.id}`}
+          className="col-span-1 cursor-pointer group h-full"
+          onClick={isSold ? (e) => e.preventDefault() : undefined}
+        >
+          <div className="aspect-square w-full relative overflow-hidden rounded-2xl">
+            <Image
+              fill
+              alt={data.name || "default"}
+              src={data.image || default_image}
+              className="object-cover h-full w-full group-hover:scale-110 transition"
+            />
+          </div>
+        </WrapperElement>
         <div className="relative">
           <WrapperElement
             href={isSold ? undefined : `/restaurants/${data.id}`}

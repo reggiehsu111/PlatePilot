@@ -15,6 +15,7 @@ import useEditSellModal from "@/app/hooks/useEditSellModal";
 import EditSellModal from "@/app/components/modals/EditSellModal";
 import useSellModal from "@/app/hooks/useSellModal";
 import useReserveModal from "@/app/hooks/useReserveModal";
+import Image from "next/image";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -104,6 +105,8 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
     return defaultHours;
   }
 
+  
+
   function formatReviews(reviews: any): Review[] | null {
     const restaurantId = uuidv4();
     if (
@@ -127,13 +130,16 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   const openingHours = formatOpeningHours(restaurant.hours);
   const formattedReviews = formatReviews(restaurant.reviews);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY;
-  console.log(restaurant);
+  const default_image = restaurant.image || '/images/sold_mid.png'
 
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
         <div className="flex flex-col pt-10 gap-8">
           {/* Images */}
+          <div className=" flex w-full h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden rounded-2xl relative">
+            <Image fill src={ default_image } alt={restaurant.name || ""} className="object-cover w-full" />
+          </div>
 
           {/* Name and Map */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 ">
@@ -165,23 +171,24 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
               ></iframe>
             </div>
           </div>
-          <div>Reviews</div>
-          <div className="flex flex-col overflow-x-auto">
-            <RestaurantReviews
-              className="flex-grow"
-              reviews={restaurant.reviews}
-            />
+          <div className="flex flex-col gap-4">
+            <div className="flex text-lg font-bold">Reviews</div>
+            <div className="flex flex-col overflow-x-auto">
+              <RestaurantReviews
+                reviews={formattedReviews}
+              />
+            </div>
           </div>
 
           {/* Tabs for Reviews */}
           <div className="flex flex-col overflow-x-auto">
-            <div className="flex mb-4">
+            <div className="flex mb-4 text-lg">
               {TABS.map((tabName) => (
                 <button
                   key={tabName}
                   onClick={() => handleTabClick(tabName)}
                   className={`px-4 py-2 rounded-xl ${
-                    activeTab === tabName ? "bg-gray-200" : ""
+                    activeTab === tabName ? "bg-gray-200 font-bold" : ""
                   }`}
                 >
                   {tabName}

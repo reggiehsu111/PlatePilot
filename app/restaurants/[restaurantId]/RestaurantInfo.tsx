@@ -21,7 +21,7 @@ interface RestaurantInfoProps {
 }
 
 const formatOpeningHours = (hours: string): string => {
-  if (hours === '0:0-0:0') return 'Closed'
+  if (hours === '0:0-0:0' || hours == 'Closed') return 'Closed'
   const [start, end] = hours.split('-').map((time) => {
     const [hrs, mins] = time.split(':').map(Number)
     const suffix = hrs >= 12 ? 'PM' : 'AM'
