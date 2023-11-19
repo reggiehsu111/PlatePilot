@@ -14,7 +14,15 @@ interface OpeningHours {
 interface RestaurantInfoProps {
   isOpen: number
   name: string
-  // openingHours: OpeningHours
+  openingHours: {
+    Monday?: string;
+    Tuesday?: string;
+    Wednesday?: string;
+    Thursday?: string;
+    Friday?: string;
+    Saturday?: string;
+    Sunday?: string;
+  }
   address: string
   stars: number
 }
@@ -33,21 +41,26 @@ const formatOpeningHours = (hours: string): string => {
 const RestaurantInfo: React.FC<RestaurantInfoProps> = ({
   isOpen,
   name,
-  // openingHours,
+  openingHours,
   address,
   stars
 }) => {
   const today = new Date().toLocaleString('en-US', { weekday: 'long' })
-  // const todayHoursRaw = openingHours[today as keyof OpeningHours];
-  // const todayHours = todayHoursRaw ? formatOpeningHours(todayHoursRaw) : 'Not available';
   const openStatusColor = isOpen ? 'bg-green-500' : 'bg-gray-300'
+
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {/* Restaurant Name */}
       <div className="flex items-center justify-start">
         <div className={`h-3 w-3 rounded-full ${openStatusColor} mr-2`}></div>
-        <div className="text-lg">{`Restaurant Name: ${name}`}</div>
+        <div className="text-3xl font-bold">{name}</div>
         {/* Include SVG for dropdown icon */}
+      </div>
+
+      {/* Stars */}
+      <div className="flex items-center justify-start">
+        <StarRating stars={stars} />
       </div>
 
       {/* Address */}
@@ -56,9 +69,18 @@ const RestaurantInfo: React.FC<RestaurantInfoProps> = ({
         <div className="text-lg">{`Address: ${address}`}</div>
       </div>
 
-      {/* Stars */}
-      <div className="flex items-center justify-start">
-        <StarRating stars={stars} />
+      {/* Opening Hours for the Week */}
+      <div>
+        <h3 className="text-lg mb-2">Opening Hours:</h3>
+        <ul>
+          {Object.entries(openingHours).map(([day, hours]) => (
+            <li key={day} className="flex">
+              {/* Adding margin to the right of the day name span */}
+              <span className="pl-6 flex-none w-20 font-semibold mr-10">{day}</span>
+              <span>: {hours ? formatOpeningHours(hours) : 'Closed'}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

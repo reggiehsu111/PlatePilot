@@ -8,10 +8,11 @@ interface StarRatingProps {
 const StarRating: React.FC<StarRatingProps> = ({ stars, outOf = 5 }) => {
   const fullStars = Math.floor(stars);
   const partialStarPercentage = (stars % 1) * 100;
-  const emptyStars = outOf - Math.ceil(stars);
+  const emptyStars = outOf - fullStars;
 
   return (
-    <div className="flex">
+    
+    <div className="flex text-3xl">
       {/* Full Stars */}
       {Array(fullStars).fill(0).map((_, index) => (
         <FaStar key={index} className="text-yellow-400" />
@@ -38,6 +39,7 @@ const StarRating: React.FC<StarRatingProps> = ({ stars, outOf = 5 }) => {
 
       {/* Empty Stars */}
       {Array(emptyStars).fill(0).map((_, index) => (
+        
         <FaRegStar key={index} className="text-gray-300" />
       ))}
     </div>

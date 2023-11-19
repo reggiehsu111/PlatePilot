@@ -58,16 +58,47 @@ const ItemClient: React.FC<ItemClientProps> = ({
   }, [restaurant.category])
 
   interface OpeningHours {
-    Monday: string
-    Tuesday: string
-    Wednesday: string
-    Thursday: string
-    Friday: string
-    Saturday: string
-    Sunday: string
+    Monday: string;
+    Tuesday: string;
+    Wednesday: string;
+    Thursday: string;
+    Friday: string;
+    Saturday: string;
+    Sunday: string;
   }
-console.log(restaurant.hours);
-// const openingHours: OpeningHours = restaurant.hours as OpeningHours;
+  
+  function formatOpeningHours(hours: any): OpeningHours {
+    // Default opening hours
+    const defaultHours = {
+      Monday: 'Closed',
+      Tuesday: 'Closed',
+      Wednesday: 'Closed',
+      Thursday: 'Closed',
+      Friday: 'Closed',
+      Saturday: 'Closed',
+      Sunday: 'Closed',
+    };
+  
+    if (typeof hours === 'object' && hours !== null) {
+      // Assume hours is an object with days as keys and string as values
+      return {
+        Monday: hours.Monday || defaultHours.Monday,
+        Tuesday: hours.Tuesday || defaultHours.Tuesday,
+        Wednesday: hours.Wednesday || defaultHours.Wednesday,
+        Thursday: hours.Thursday || defaultHours.Thursday,
+        Friday: hours.Friday || defaultHours.Friday,
+        Saturday: hours.Saturday || defaultHours.Saturday,
+        Sunday: hours.Sunday || defaultHours.Sunday,
+      };
+    }
+  
+    // If hours is not an object or is null, return default hours
+    return defaultHours;
+  }
+  
+  // Usage in your component
+  const openingHours = formatOpeningHours(restaurant.hours);
+  
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
@@ -80,7 +111,7 @@ console.log(restaurant.hours);
               <RestaurantInfo
                 isOpen={restaurant.is_open || 0}
                 name={restaurant.name ?? ''}
-                // openingHours={openingHours}
+                openingHours={openingHours}
                 address={
                   restaurant.address +
                   ', ' +
