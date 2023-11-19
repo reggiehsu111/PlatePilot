@@ -1,6 +1,6 @@
 "use client";
 
-import { SafeItem, SafeUser, SafeRestaurant } from "@/app/types";
+import { SafeItem, SafeUser, SafeRestaurant, SafeReview } from "@/app/types";
 import { Reservation } from "@prisma/client";
 import { useState, useMemo, useCallback } from "react";
 import { categories } from "@/app/components/navbar/Categories";
@@ -15,11 +15,9 @@ import useEditSellModal from "@/app/hooks/useEditSellModal";
 import EditSellModal from "@/app/components/modals/EditSellModal";
 import useSellModal from "@/app/hooks/useSellModal";
 import useReserveModal from "@/app/hooks/useReserveModal";
-
-import { Map } from "@/app/components/Map";
 interface RestaurantClientProps {
   reservations?: Reservation[];
-  restaurant: SafeRestaurant;
+  restaurant: SafeRestaurant
   currentUser?: SafeUser | null;
 }
 const TABS = [
@@ -100,7 +98,7 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
   // Usage in your component
   const openingHours = formatOpeningHours(restaurant.hours);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY
-  console.log(gmap)
+  console.log(restaurant)
   
   return (
     <Container>
@@ -133,7 +131,6 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
               <iframe
                 width="100%"
                 height="500"
-                
                 src={`https://www.google.com/maps/embed/v1/place?key=${gmap}&q=${restaurant.latitude},${restaurant.longitude}&zoom=18`}
               >
               </iframe>

@@ -18,7 +18,6 @@ export default async function getRestaurantById(params: IParams) {
     return {
       ...restaurant,
     };
-    console.log("restaurant:", restaurant);
   } catch (error: any) {
     throw new Error(error);
   }

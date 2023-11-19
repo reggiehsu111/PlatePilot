@@ -2,7 +2,7 @@ import React from "react";
 import { Prisma } from "@prisma/client";
 
 interface Review {
-  id: int;
+  id: number;
   text: string;
 }
 
@@ -12,12 +12,15 @@ interface RestaurantReviewsProps {
 
 const RestaurantReviews: React.FC<RestaurantReviewsProps> = ({ reviews }) => {
   console.log(reviews);
-  const reviewArray = reviews as Prisma.JsonArray;
+  if (!reviews || reviews.length === 0) {
+    return <div>No reviews available.</div>;
+  }
+
   return (
     <div>
-      {reviewArray.map((review) => {
-        <div>{review.text}</div>;
-      })}
+      {reviews.map((review) => (
+        <div key={review.id}>{review.text}</div>
+      ))}
     </div>
   );
 };

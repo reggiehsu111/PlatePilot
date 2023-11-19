@@ -87,7 +87,7 @@ Table Restaurant {
   review_count Int
   is_open Int
   category String
-  reviews Json[] [not null]
+  reviews Json
   category_array String[] [not null]
   bikeParking Boolean
   outdoorSeating Boolean
