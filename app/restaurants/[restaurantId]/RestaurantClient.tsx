@@ -99,7 +99,9 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
 
   // Usage in your component
   const openingHours = formatOpeningHours(restaurant.hours);
-
+  const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY
+  console.log(gmap)
+  
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
@@ -107,8 +109,8 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
           {/* Images */}
 
           {/* Name and Map */}
-          <div className="grid grid-cols-1 md:grid-cols-12 md:gap-10">
-            <div className="col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 ">
+            <div className="col-span-6">
               <RestaurantInfo
                 isOpen={restaurant.is_open || 0}
                 name={restaurant.name ?? ""}
@@ -127,13 +129,19 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
             </div>
 
             {/* Google Maps - Colin */}
-            <div className="col-span-5">
-              <Map />
+            <div className="col-span-6">
+              <iframe
+                width="100%"
+                height="500"
+                
+                src={`https://www.google.com/maps/embed/v1/place?key=${gmap}&q=${restaurant.latitude},${restaurant.longitude}&zoom=18`}
+              >
+              </iframe>
             </div>
           </div>
 
           {/* Tabs for Reviews */}
-          <div className="flex flex-col">
+          <div className="flex flex-col overflow-x-auto">
             <div className="flex mb-4">
               {TABS.map((tabName) => (
                 <button

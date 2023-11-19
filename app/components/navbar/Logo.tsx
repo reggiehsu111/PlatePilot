@@ -14,7 +14,7 @@ const Logo = () => {
           src= '/images/platepilot-logo.png'
           className='block cursor-pointer p-3'
           height='65'
-          width='260'
+          width='300'
         />
     </a>
   )

@@ -4,14 +4,14 @@ import Container from "@/app/components/Container";
 import Heading from "../components/Heading";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import getSavedItems from "../actions/getSavedItems";
-import SavedItemsClient from "./SavedClient";
+import getSavedRestaurants from "../actions/getSavedItems";
+import SavedRestaurantsClient from "./SavedClient";
 import { EmptyStateMode } from "../types/constants";
 
 const SavedItemPage = async () => {
-  const items = await getSavedItems();
+  const restaurants = await getSavedRestaurants();
   const currentUser = await getCurrentUser();
-  if (items.length === 0) { 
+  if (restaurants.length === 0) { 
     return (
       <ClientOnly>
         <Container>
@@ -29,7 +29,7 @@ const SavedItemPage = async () => {
 
   return (
     <ClientOnly>
-      <SavedItemsClient items={items} currentUser={currentUser} />
+      <SavedRestaurantsClient restaurants={restaurants} currentUser={currentUser} />
     </ClientOnly>
   )
 }

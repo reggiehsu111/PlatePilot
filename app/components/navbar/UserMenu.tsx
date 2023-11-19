@@ -64,20 +64,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         {currentUser && (
           <div className="flex items-center justify-between">
             <div className="hidden md:block lg:text-base text-sm font-semibold text-[#00274C]">
-              Go Blue!
+              Go EAT!
             </div>
             <div className="hidden md:block md:text-base text-sm font-bold ml-2 text-[#00274C]">
               {currentUser.name}
             </div>
           </div>
         )}
-
-        <div
-          onClick={onSell}
-          className="hidden md:block lg:text-base text-sm font-semibold py-3 px-[14px] rounded-2xl hover:bg-[#00274CE6] hover:text-white transition cursor-pointer"
-        >
-          Add an item
-        </div>
 
         <div
           ref={toggleButtonRef}
@@ -99,20 +92,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  label="Add an item"
-                  onClick={sellModal.onOpen}
-                />
-                <MenuItem
-                  label="My orders"
-                  onClick={() => router.push('/orders')}
-                />
-                <MenuItem
                   label="Saved"
                   onClick={() => router.push('/saved')}
-                />
-                <MenuItem
-                  label="Profile"
-                  onClick={() => router.push('/profile')}
                 />
                 <MenuItem
                   label="Logout"

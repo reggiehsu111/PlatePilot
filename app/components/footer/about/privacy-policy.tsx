@@ -5,10 +5,10 @@ const PrivacyPolicy: React.FC = () => {
     <div className="px-6 py-4">
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
       <p className="mb-2">
-        <strong className="font-semibold">Last updated:</strong> Aug 23, 2023
+        <strong className="font-semibold">Last updated:</strong> Nov 18, 2023
       </p>
       <p className="mb-4">
-        This document outlines the privacy practices for mtsa-marketplace,
+        This document outlines the privacy practices for plate-pilot,
         inspired by various standard terms.
       </p>
 
@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC = () => {
       <div className="pl-5 mb-4">
         <p className="mb-1">
           <strong className="font-semibold">a.</strong> Directly from you:
-          Registration, listing items, and other interactions.
+          Registration, and other interactions.
         </p>
         <p className="mb-1">
           <strong className="font-semibold">b.</strong> From third parties: Data
@@ -47,12 +47,6 @@ const PrivacyPolicy: React.FC = () => {
         third parties.
       </p>
 
-      <h2 className="text-xl font-semibold mb-2">5. Your Choices:</h2>
-      <p className="mb-4">
-        Account: You can modify your account. Some data may be retained as
-        required.
-      </p>
-
       <p className="mb-4">
         This policy was drafted with reference to various standard terms. For
         inquiries, email
@@ -62,13 +56,6 @@ const PrivacyPolicy: React.FC = () => {
         >
           liuyiche@umich.edu
         </a>{' '}
-        or
-        <a
-          href="mailto:whsjerryliu@gmail.com"
-          className="text-blue-500 underline ml-1"
-        >
-          whsjerryliu@gmail.com
-        </a>
         .
       </p>
     </div>

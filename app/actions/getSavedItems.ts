@@ -1,7 +1,7 @@
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
 
-export default async function getSavedItems() {
+export default async function getSavedRestaurants() {
   try {
     const currentUser = await getCurrentUser();
     if (!currentUser) {
@@ -9,33 +9,20 @@ export default async function getSavedItems() {
     }
 
     let query: any = {
-      reservation: null,
       id: {
         in: [...(currentUser.favoriteIds || [])]
       }
     }
 
-    const savedItems = await prisma.item.findMany({
+    const savedRestaurants = await prisma.restaurant.findMany({
       where: query,
-      include: {
-        user: true
-      }
     })
 
-    const safeSavedItems = savedItems.map((saved) => ({
+    const safeSavedRestaurants = savedRestaurants.map((saved) => ({
       ...saved,
-      user: {
-        ...saved.user,
-        createdAt: saved.user.createdAt.toISOString(),
-        updatedAt: saved.user.updatedAt.toISOString(),
-        emailVerified: saved.user.emailVerified
-          ? saved.user.emailVerified.toISOString()
-          : null
-      },
-      createdAt: saved.createdAt.toISOString()
     }))
 
-    return safeSavedItems;
+    return safeSavedRestaurants;
   } catch (error: any) {
     throw new Error(error);
   }

@@ -5,10 +5,10 @@ const TermsOfUse: React.FC = () => {
     <div className="px-6 py-4">
       <h1 className="text-3xl font-bold mb-4">Terms of Use</h1>
       <p className="mb-2">
-        <strong className="font-semibold">Last updated:</strong> Aug 23, 2023
+        <strong className="font-semibold">Last updated:</strong> Nov 18, 2023
       </p>
       <p className="mb-4">
-        This document outlines the terms of use for marketplace, inspired
+        This document outlines the terms of use for plate-pilot, inspired
         by various standard terms.
       </p>
 
@@ -73,13 +73,6 @@ const TermsOfUse: React.FC = () => {
         >
           liuyiche@umich.edu
         </a>{' '}
-        or
-        <a
-          href="mailto:whsjerryliu@gmail.com"
-          className="text-blue-500 underline ml-1"
-        >
-          whsjerryliu@gmail.com
-        </a>
         .
       </p>
     </div>

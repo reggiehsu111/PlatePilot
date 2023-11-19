@@ -12,6 +12,7 @@ interface IParams {
 const ItemPage = async ({ params }: { params: IParams }) => {
   const restaurant = await getRestaurantById(params);
   const currentUser = await getCurrentUser();
+  
 
   if (!restaurant) {
     return (
@@ -26,7 +27,8 @@ const ItemPage = async ({ params }: { params: IParams }) => {
 
   return (
     <ClientOnly>
-      <RestaurantClient restaurant={restaurant} currentUser={currentUser} />
+      {/* <RestaurantClient restaurant={restaurant} currentUser={currentUser} gmap={Map(restaurant.latitude, restaurant.longitude)} /> */}
+      <RestaurantClient restaurant={restaurant} currentUser={currentUser}/>
     </ClientOnly>
   );
 };

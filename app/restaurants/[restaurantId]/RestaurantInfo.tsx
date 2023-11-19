@@ -14,15 +14,16 @@ interface OpeningHours {
 interface RestaurantInfoProps {
   isOpen: number
   name: string
-  openingHours: {
-    Monday?: string;
-    Tuesday?: string;
-    Wednesday?: string;
-    Thursday?: string;
-    Friday?: string;
-    Saturday?: string;
-    Sunday?: string;
-  }
+  openingHours: object
+  // openingHours: {
+  //   Monday?: string;
+  //   Tuesday?: string;
+  //   Wednesday?: string;
+  //   Thursday?: string;
+  //   Friday?: string;
+  //   Saturday?: string;
+  //   Sunday?: string;
+  // }
   address: string
   stars: number
 }
