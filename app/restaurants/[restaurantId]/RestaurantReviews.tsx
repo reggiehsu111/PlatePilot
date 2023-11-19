@@ -4,10 +4,11 @@ import { Prisma } from "@prisma/client";
 interface Review {
   id: number;
   text: string;
+  restaurantId: string;
 }
 
 interface RestaurantReviewsProps {
-  reviews: Review[];
+  reviews: Review[] | null;
 }
 
 const RestaurantReviews: React.FC<RestaurantReviewsProps> = ({ reviews }) => {
@@ -19,7 +20,7 @@ const RestaurantReviews: React.FC<RestaurantReviewsProps> = ({ reviews }) => {
   return (
     <div>
       {reviews.map((review) => (
-        <div key={review.id}>{review.text}</div>
+        <div key={`${review.restaurantId}-${review.id}`}>{review.text}</div>
       ))}
     </div>
   );

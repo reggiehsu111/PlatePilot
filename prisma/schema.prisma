@@ -147,6 +147,9 @@ model Restaurant {
 model Review {
  id            String          @id @default(auto()) @map("_id") @db.ObjectId
  text          String
+ restaurantId  String          @db.ObjectId
+ restaurant    Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
 
  createdAt     DateTime        @default(now())
  updatedAt     DateTime        @updatedAt

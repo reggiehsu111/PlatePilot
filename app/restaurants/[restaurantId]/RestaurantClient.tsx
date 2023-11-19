@@ -15,6 +15,8 @@ import useEditSellModal from "@/app/hooks/useEditSellModal";
 import EditSellModal from "@/app/components/modals/EditSellModal";
 import useSellModal from "@/app/hooks/useSellModal";
 import useReserveModal from "@/app/hooks/useReserveModal";
+
+import { v4 as uuidv4 } from 'uuid'
 interface RestaurantClientProps {
   reservations?: Reservation[];
   restaurant: SafeRestaurant
@@ -66,6 +68,12 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
     Sunday: string;
   }
 
+  interface Review {
+    id: number;
+    text: string;
+    restaurantId: string;
+  }
+
   function formatOpeningHours(hours: any): OpeningHours {
     // Default opening hours
     const defaultHours = {
@@ -95,8 +103,23 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
     return defaultHours;
   }
 
+  function formatReviews(reviews: any): Review[] | null {
+    const restaurantId = uuidv4();
+    if (Array.isArray(reviews) && reviews.every(review => typeof review === 'object' && 'id' in review && 'text' in review)) {
+      return reviews.map(review => ({
+        id: review.id,
+        text: review.text,
+        restaurantId: restaurantId
+      }));
+    }
+  
+    return null;
+  }
+  
+
   // Usage in your component
   const openingHours = formatOpeningHours(restaurant.hours);
+  const formattedReviews = formatReviews(restaurant.reviews);
   const gmap = process.env.NEXT_PUBLIC_GMAPS_API_KEY
   console.log(restaurant)
   
@@ -153,7 +176,7 @@ const RestaurantClient: React.FC<RestaurantClientProps> = ({
               ))}
             </div>
             <div className="flex-grow">
-              <RestaurantReviews reviews={restaurant.reviews} />
+              <RestaurantReviews reviews={formattedReviews} />
             </div>
             <div className="flex-grow">
               {activeTab === "Service" && <p>Content for Service</p>}
