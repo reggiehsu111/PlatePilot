@@ -1,4 +1,4 @@
-import getRestaurants, { IRestaurantsParams } from "./actions/getRestaurants";
+import getRestaurants, { IRestaurantParams } from "./actions/getRestaurants";
 import getCurrentUser from "./actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import Container from "./components/Container";
@@ -8,26 +8,26 @@ import CustomPagination from "./components/Pagination";
 import { EmptyStateMode } from "./types/constants";
 
 interface HomeProps {
-  searchParams: IRestaurantsParams;
+  searchParams: IRestaurantParams;
 }
 
 export default async function Home({ searchParams }: HomeProps) {
   // Get all the items
   let result;
-  let items = [];
+  let restaurants = [];
   if (searchParams.category || searchParams.search || searchParams.page) {
     result = await getRestaurants(searchParams);
-    items = result.restaurants;
+    restaurants = result.restaurants;
   } else {
     result = await getRestaurants({});
-    items = result.restaurants;
+    restaurants = result.restaurants;
   }
 
   const currentUser = await getCurrentUser();
 
   const isHomeUrl = !searchParams.category && !searchParams.search;
 
-  if (items.length == 0) {
+  if (restaurants.length == 0) {
     return (
       <ClientOnly>
         <EmptyState
@@ -42,18 +42,18 @@ export default async function Home({ searchParams }: HomeProps) {
     <ClientOnly>
       <Container>
         <div className="pt-28 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 xl:gap-6">
-          {items.map((item) => {
+          {restaurants.map((restaurant) => {
             return (
               <RestaurantsCard
-                key={item.id}
-                data={item}
+                key={restaurant.id}
+                data={restaurant}
                 currentUser={currentUser}
               />
             );
           })}
         </div>
         <CustomPagination
-          totalRestaurantsCount={result.totalRestaurantsCount}
+          totalItemsCount={result.totalRestaurantsCount}
           isHomeUrl={isHomeUrl}
         />
       </Container>

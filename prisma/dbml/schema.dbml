@@ -88,6 +88,7 @@ Table Restaurant {
   is_open Int
   category String
   reviews Review [not null]
+  category_array String[] [not null]
   bikeParking Boolean
   outdoorSeating Boolean
   restaurantsReservations Boolean

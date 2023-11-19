@@ -10,9 +10,7 @@ import Avatar from "../Avatar";
 import { CardMode } from "@/app/types/constants";
 
 interface RestaurantsCardProps {
-  data: SafeRestaurant & {
-    user: SafeUser;
-  };
+  data: SafeRestaurant;
   currentUser?: SafeUser | null;
   disabled?: boolean;
   actionLabel?: string;
@@ -55,7 +53,7 @@ const RestaurantsCard: React.FC<RestaurantsCardProps> = ({
             <div className="flex items-start">
               <div className="w-5/6 font-bold text-lg">{data.name}</div>
             </div>
-            <div className="text-neutral-500">{data.category}</div>
+            <div className="text-neutral-500">{data.categories}</div>
             <div className="flex flex-row items-center justify-between">
               <div className="flex flex-row justify-start gap-1">
                 <div className="flex font-bold text-yellow-600">★</div>

@@ -108,6 +108,7 @@ model Restaurant {
  is_open             Int?
  category            String?
  reviews             Review[]
+ category_array      String[]
 
 
  // New fields to match JSON content
