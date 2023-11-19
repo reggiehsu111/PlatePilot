@@ -10,11 +10,7 @@ interface Review {
 }
 
 interface SearchGptProps {
-<<<<<<< HEAD
   formattedReviews: Review[] | null;
-=======
-  formattedReviews: any | null;
->>>>>>> ca936ab (fix build)
 }
 
 const SearchGpt: React.FC<SearchGptProps> = ({ formattedReviews }) => {

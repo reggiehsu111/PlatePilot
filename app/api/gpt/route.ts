@@ -31,14 +31,10 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     // Handle any errors that occur during the request
-<<<<<<< HEAD
     return NextResponse.json(
       { error: "An error occurred during your request." },
       { status: 500 }
     );
-=======
-    return NextResponse.json({ status: 500 });
->>>>>>> ca936ab (fix build)
   }
 }
 import { NextResponse } from "next/server";
