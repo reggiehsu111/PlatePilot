@@ -42,7 +42,7 @@ const LoginModal = () => {
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
-        title="Welcome back to marketplace"
+        title="Welcome back to PlatePilot"
         subtitle="Please login to continue"
         icon={FaRegLaughSquint}
         center
@@ -90,10 +90,10 @@ const LoginModal = () => {
         onClick={() => signIn('github')}
       />
       <div className="flex flex-row justify-center items-center gap-2">
-        <div className="flex text-[#00274C]">Don&apos;t have an account?</div>
+        <div className="flex text-[#000000]">Don&apos;t have an account?</div>
         <div
           onClick={toggle}
-          className="text-[#00274C] font-bold cursor-pointer hover:opacity-50"
+          className="text-[#000000] font-bold cursor-pointer hover:opacity-50"
         >
           Register
         </div>
