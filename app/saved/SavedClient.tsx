@@ -16,7 +16,7 @@ const SavedRestaurantsClient: React.FC<SavedRestaurantsClientProps> = ({
 }) => {
   return (
     <Container>
-      <div className="py-6">
+      <div className="py-6 pt-10">
         <Heading title="SAVED RESTAURANTS" />
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 xl:gap-6">
           {restaurants.map(
